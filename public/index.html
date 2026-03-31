@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arama Paneli</title>
+</head>
+<body style="text-align:center; font-family:Arial;">
+    <h1>📞 Arama Paneli</h1>
+
+    <input type="text" id="numara" placeholder="Numara gir">
+    <br><br>
+    <button onclick="ara()">Ara</button>
+
+    <script>
+    function ara(){
+        let numara = document.getElementById("numara").value;
+
+        fetch("/api/call", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ numara: numara })
+        })
+        .then(res => res.json())
+        .then(data => {
+            alert("Arama başlatıldı: " + data.number);
+            window.location = "/call.html";
+        });
+    }
+    </script>
+</body>
+</html>
